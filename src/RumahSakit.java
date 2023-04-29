@@ -4,6 +4,14 @@ import java.util.Scanner;
 public class RumahSakit {
     private static final int FULL_WIDTH = 70;
     private static final Scanner sc = new Scanner(System.in);
+    private static final String[] DATA_PASIEN = {
+            "Nares", "Vike", "Norman", "Amber", "Violet"
+    };
+
+    private static void autoFill(Antrian antrian, int counter) {
+        for (String name : DATA_PASIEN)
+            antrian.enqueue(new Pasien(name, counter));
+    }
 
     private static void cetakMenu() {
         System.out.println("""
@@ -43,6 +51,7 @@ public class RumahSakit {
                         .formatted(p[pos].getNomor(), p[pos].getTanggal(), p[pos].getWaktu(), p[pos].getNama()));
                 if (pos == antrian.capactiy() - 1) pos = 0;
                 pos++;
+                System.out.println("current position: " + pos);
                 counter--;
             }
         } else {
@@ -72,9 +81,11 @@ public class RumahSakit {
     }
     
     public static void main(String[] args) {
-        /* Class variables */
         Antrian antrian = new Antrian(5);
         int counter = 0;
+
+        /* Auto assign test data */
+        autoFill(antrian, counter);
 
         /* Program loop */
         boolean isRunning = true;
