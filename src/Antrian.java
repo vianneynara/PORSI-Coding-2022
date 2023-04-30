@@ -16,9 +16,9 @@ public class Antrian {
     }
 
     public boolean enqueue(Pasien data){
-        if (size != antrian.length) {
+        if (size != capactiy()) {
             antrian[rear] = data;
-            if (rear >= antrian.length - 1)
+            if (rear >= capactiy() - 1)
                 rear = 0;
             else
                 rear++;
@@ -30,7 +30,7 @@ public class Antrian {
 
     public Pasien dequeue(){
         if (!isEmpty()) {
-            if (front >= antrian.length)
+            if (front >= capactiy())
                 front = 0;
             size--;
             Pasien data = antrian[front];
