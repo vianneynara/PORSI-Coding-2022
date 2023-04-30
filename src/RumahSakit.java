@@ -6,9 +6,10 @@ public class RumahSakit {
     private static final Scanner sc = new Scanner(System.in);
     private static final String[] DATA_PASIEN = {"Nares", "Vike", "Norman", "Amber", "Violet"};
 
-    private static void autoFill(Antrian antrian, int counter) {
+    private static int autoFill(Antrian antrian, int counter) {
         for (String name : DATA_PASIEN)
             antrian.enqueue(new Pasien(name, ++counter));
+        return counter;
     }
 
     private static void cetakMenu() {
@@ -37,16 +38,16 @@ public class RumahSakit {
     private static void cetakAntrian(Antrian antrian) {
         if (!antrian.isEmpty()) {
             System.out.printf("%-70s%n", "DAFTAR ANTRIAN");
-            System.out.println("%15s | %15s | %10s | %-21s"
-                    .formatted("No. Antrian", "Tanggal", "Waktu", "Nama Pasien"));
+            System.out.printf("%15s | %15s | %10s | %-21s%n",
+                    "No. Antrian", "Tanggal", "Waktu", "Nama Pasien");
             System.out.println("-".repeat(FULL_WIDTH));
 
             int counter = antrian.size();
             int pos = antrian.getFront();
             var p = antrian.getAntrian();
             while (counter != 0) {
-                System.out.println("%15d | %15s | %10s | %-21s"
-                        .formatted(p[pos].getNomor(), p[pos].getTanggal(), p[pos].getWaktu(), p[pos].getNama()));
+                System.out.printf("%15d | %15s | %10s | %-21s%n",
+                        p[pos].getNomor(), p[pos].getTanggal(), p[pos].getWaktu(), p[pos].getNama());
                 if (pos++ == antrian.capactiy() - 1) pos = 0;
                 counter--;
             }
@@ -81,7 +82,7 @@ public class RumahSakit {
         int counter = 0;
 
         /* Auto assign test data */
-        autoFill(antrian, counter);
+        counter = autoFill(antrian, counter);
 
         /* Program loop */
         boolean isRunning = true;
