@@ -38,7 +38,6 @@ public class Antrian {
             front++;
             return data;
         }
-        System.out.println("HEY! RETURNED NULL!");
         return null;
     }
 
